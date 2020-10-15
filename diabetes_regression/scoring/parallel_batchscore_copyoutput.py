@@ -34,7 +34,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_path", type=str, default=None)
     parser.add_argument("--score_container", type=str, default=None)
-    parser.add_argument("--scoring_datastore_access_key", type=str,
+    parser.add_argument("--scoring_datastore_key", type=str,
                         default=None)
     parser.add_argument("--scoring_output_filename", type=str, default=None)
 
@@ -45,7 +45,7 @@ def copy_output(args):
     print("Output : {}".format(args.output_path))
     accounturl = "https://mlopsxebiaamlsa.blob.core.windows.net"
     containerclient = ContainerClient(
-        accounturl, args.score_container, args.scoring_datastore_access_key
+        accounturl, args.score_container, args.scoring_datastore_key
     )
 
     destfolder = date.today().isoformat()
@@ -73,8 +73,8 @@ if __name__ == "__main__":
     if (
         args.score_container is None
         or args.score_container.strip() == ""
-        or args.scoring_datastore_access_key is None
-        or args.scoring_datastore_access_key.strip() == ""
+        or args.scoring_datastore_key is None
+        or args.scoring_datastore_key.strip() == ""
         or args.scoring_output_filename is None
         or args.scoring_output_filename.strip() == ""
         or args.output_path is None
