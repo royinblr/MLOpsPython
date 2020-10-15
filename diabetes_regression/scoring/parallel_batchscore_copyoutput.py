@@ -45,7 +45,7 @@ def copy_output(args):
     print("Output : {}".format(args.output_path))
     accounturl = "https://mlopsxebiaamlsa.blob.core.windows.net"
     containerclient = ContainerClient(
-        accounturl, args.score_container, args.scoring_datastore_key
+        accounturl, args.score_container, args.scoring_datastore_access_key
     )
 
     destfolder = date.today().isoformat()
