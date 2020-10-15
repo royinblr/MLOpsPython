@@ -33,9 +33,9 @@ import os
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output_path", type=str, default=None)
-    parser.add_argument("--scoring_datastore", type=str, default=None)
     parser.add_argument("--score_container", type=str, default=None)
-    parser.add_argument("--scoring_datastore_key", type=str, default=None)
+    parser.add_argument("--scoring_datastore_access_key", type=str,
+                        default=None)
     parser.add_argument("--scoring_output_filename", type=str, default=None)
 
     return parser.parse_args()
@@ -43,11 +43,7 @@ def parse_args():
 
 def copy_output(args):
     print("Output : {}".format(args.output_path))
-
-    accounturl = "https://{}.blob.core.windows.net".format(
-        args.scoring_datastore
-    )  # NOQA E501
-
+    accounturl = "https://mlopsxebiaamlsa.blob.core.windows.net"
     containerclient = ContainerClient(
         accounturl, args.score_container, args.scoring_datastore_key
     )
@@ -75,12 +71,10 @@ def copy_output(args):
 if __name__ == "__main__":
     args = parse_args()
     if (
-        args.scoring_datastore is None
-        or args.scoring_datastore.strip() == ""
-        or args.score_container is None
+        args.score_container is None
         or args.score_container.strip() == ""
-        or args.scoring_datastore_key is None
-        or args.scoring_datastore_key.strip() == ""
+        or args.scoring_datastore_access_key is None
+        or args.scoring_datastore_access_key.strip() == ""
         or args.scoring_output_filename is None
         or args.scoring_output_filename.strip() == ""
         or args.output_path is None
